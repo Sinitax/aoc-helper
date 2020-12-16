@@ -14,4 +14,4 @@ I recommend symlinking configuration files (except `data/headers`), as they wont
 
 4. Run `source enable` from outside the submodule to enable the virtualenv and `aoc help` for a list of commands
 
-5. (Optional) Symlink scripts for building and running a solution into `scripts` to run them via `aoc <cmd>`
+5. (Optional) Symlink other custom scripts into `scripts` to run them through `aoc <cmd>`
