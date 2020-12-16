@@ -3,7 +3,7 @@
 HELPER_ROOT="$( cd "$(dirname $(realpath "${BASH_SOURCE[0]}"))" >/dev/null 2>&1 && pwd )"
 
 if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
-    SOLUTIONS_ROOT=$(git -C "$PWD" rev-parse --show-toplevel)
+    SOLUTIONS_ROOT=$(git rev-parse --show-toplevel)
     if [[ "$SOLUTIONS_ROOT" == "$HELPER_ROOT" ]]; then
         echo "Has to be run in the solutions repository to detect root path!"
         return 1

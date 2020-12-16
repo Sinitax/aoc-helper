@@ -7,7 +7,8 @@ export AOCYEAR=2020
 export SRCDIR="src"
 
 # specify what files to copy to your day directory on prepare
-TEMPLATE_DIR="data"
-declare -xA TEMPLATE_FILES
-TEMPLATE_FILES["main.c"] = "main.c"
-TEMPLATE_FILES["makefile"] = "makefile"
+export TEMPLATE_DIR="data"
+export TEMPLATE_FILES="
+main.c:main.c
+makefile:makefile
+"
