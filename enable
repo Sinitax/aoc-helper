@@ -1,0 +1,38 @@
+#!/bin/bash
+
+HELPER_ROOT="$( cd "$(dirname $(realpath "${BASH_SOURCE[0]}"))" >/dev/null 2>&1 && pwd )"
+
+if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
+    SOLUTIONS_ROOT=$(git -C "$PWD" rev-parse --show-toplevel)
+    if [[ "$SOLUTIONS_ROOT" == "$HELPER_ROOT" ]]; then
+        echo "Has to be run in the solutions repository to detect root path!"
+        return 1
+    fi
+
+    if [ ! -e "$HELPER_ROOT/data/config" ]; then
+        echo "Setup the config file! data/sample-config is provided for reference"
+        return 1
+    fi
+
+    echo "Enabling AoC env.."
+    if [ ! -z "$PS1_PREFIX" ]; then
+        echo "Already initialized!"
+        return 0
+    fi
+
+    # kinda hacky but simplest way to get it done
+    bash --rcfile <(\
+        echo 'function aoc() { [ -f "$HELPER_ROOT/scripts/$1" ] \
+            && "$HELPER_ROOT/scripts/$1" ${@:2} \
+            || echo "No such script"; } '; \
+        echo "export PS1=\"[🎄]:$PS1\"";                   \
+        echo "export HELPER_ROOT=\"$HELPER_ROOT\"";        \
+        echo "export SOLUTIONS_ROOT=\"$SOLUTIONS_ROOT\"";  \
+        echo "source \"$HELPER_ROOT/data/config\"";        \
+    )
+
+    unset HELPER_ROOT
+    unset SOLUTIONS_ROOT
+else
+    echo "Source this script to run scripts"
+fi
