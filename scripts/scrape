@@ -12,8 +12,8 @@ day = int(sys.argv[1])
 cmd = sys.argv[2]
 cmdargs = None if len(sys.argv) == 3 else sys.argv[3:]
 
-year = "2020"
 colortext = True
+year = os.getenv("AOCYEAR")
 helper_root = os.getenv("HELPER_ROOT")
 solutions_root = os.getenv("SOLUTIONS_ROOT")
 src_dir = os.getenv("SRCDIR")
