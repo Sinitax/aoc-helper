@@ -22,9 +22,13 @@ if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
 
     # kinda hacky but simplest way to get it done
     bash --rcfile <(\
-        echo 'function aoc() { [ -f "$HELPER_ROOT/scripts/$1" ] \
-            && "$HELPER_ROOT/scripts/$1" ${@:2} \
-            || echo "No such script"; } '; \
+        echo 'function aoc() { \
+            if [ -f "$HELPER_ROOT/scripts/$1" ]; then      \
+                "$HELPER_ROOT/scripts/$1" ${@:2};          \
+            else                                           \
+                echo "No such script";                     \
+            fi                                             \
+        }';                                                \
         echo "export PS1=\"[🎄]:$PS1\"";                   \
         echo "export HELPER_ROOT=\"$HELPER_ROOT\"";        \
         echo "export SOLUTIONS_ROOT=\"$SOLUTIONS_ROOT\"";  \
