@@ -14,7 +14,7 @@ answer = sys.argv[3]
 year = os.getenv("AOCYEAR")
 url = f"https://adventofcode.com/{year}/day/{daynum}/answer"
 reporoot = os.getenv("HELPER_ROOT")
-headers = json.loads(open(f"{HELPER_ROOT}/data/headers").read())
+headers = json.loads(open(f"{reporoot}/data/headers").read())
 data = { 'level': lvlnum, 'answer': answer }
 
 r = requests.post(url, headers=headers, data=data)
