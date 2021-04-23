@@ -17,6 +17,8 @@ reporoot = os.getenv("HELPER_ROOT")
 headers = json.loads(open(f"{reporoot}/data/headers").read())
 data = { 'level': lvlnum, 'answer': answer }
 
-r = requests.post(url, headers=headers, data=data)
+r = requests.post(url, headers=headers, data=data, timeout=2)
+if (r.status_code != 200):
+    print("request failed (timeout?)");
 soup = BeautifulSoup(r.text, "html.parser")
 print(soup.select_one("main").text)

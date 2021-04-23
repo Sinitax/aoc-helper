@@ -25,7 +25,10 @@ def scrape_input(day):
     if os.path.exists(path):
         sys.exit(1)
 
-    r = requests.get(f"{baseurl}/input", headers = headers)
+    r = requests.get(f"{baseurl}/input", headers = headers, timeout = 2)
+    if (r.status_code != 200):
+        print("request failed (timeout?)")
+        sys.exit(1)
 
     if r.status_code != 200:
         sys.exit(1)
@@ -60,7 +63,10 @@ def scrape_text(day, part):
     if os.path.exists(path):
         sys.exit(1)
 
-    r = requests.get(baseurl, headers = headers)
+    r = requests.get(baseurl, headers = headers, timeout = 2)
+    if (r.status_code != 200):
+        print("request failed (timeout?)")
+        sys.exit(1)
     soup = BeautifulSoup(r.text, "html.parser")
 
     try:
